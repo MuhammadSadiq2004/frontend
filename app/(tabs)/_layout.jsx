@@ -3,8 +3,8 @@ import { Redirect, Tabs } from "expo-router";
 import { Image, Text, View } from "react-native";
 
 import { icons } from "../../constants";
-import { Loader } from "../../components";
-import { useGlobalContext } from "../../context/GlobalProvider";
+//import { Loader } from "../../components";
+//import { useGlobalContext } from "../../context/GlobalProvider";
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
@@ -26,21 +26,18 @@ const TabIcon = ({ icon, color, name, focused }) => {
 };
 
 const TabLayout = () => {
-  const { loading, isLogged } = useGlobalContext();
-
-  if (!loading && !isLogged) return <Redirect href="/sign-in" />;
-
+  
   return (
     <>
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: "#FFA001",
-          tabBarInactiveTintColor: "#CDCDE0",
+          tabBarActiveTintColor: "#0384fc",
+          tabBarInactiveTintColor: "#383b40",
           tabBarShowLabel: false,
           tabBarStyle: {
-            backgroundColor: "#161622",
+            backgroundColor: "white",
             borderTopWidth: 1,
-            borderTopColor: "#232533",
+            borderTopColor: "white",
             height: 84,
           },
         }}
@@ -61,15 +58,15 @@ const TabLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="bookmark"
+          name="order"
           options={{
-            title: "Bookmark",
+            title: "Order",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
                 icon={icons.bookmark}
                 color={color}
-                name="Bookmark"
+                name="Order"
                 focused={focused}
               />
             ),
@@ -77,15 +74,30 @@ const TabLayout = () => {
         />
 
         <Tabs.Screen
-          name="create"
+          name="cart"
           options={{
-            title: "Create",
+            title: "Cart",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.plus}
+                icon={icons.cart}
                 color={color}
-                name="Create"
+                name="Cart"
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="prescription"
+          options={{
+            title: "Prescription",
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon
+                icon={icons.prescription}
+                color={color}
+                name="Prescription"
                 focused={focused}
               />
             ),
@@ -108,10 +120,11 @@ const TabLayout = () => {
         />
       </Tabs>
 
-      <Loader isLoading={loading} />
-      <StatusBar backgroundColor="#161622" style="light" />
+      <StatusBar backgroundColor="white" style="light" />
     </>
   );
 };
 
 export default TabLayout;
+
+        
