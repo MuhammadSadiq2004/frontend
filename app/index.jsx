@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useRouter } from 'expo-router'; // Ensure this is correctly imported
 import * as Font from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
-import { Loader } from "../components";
+import  {Loader}  from "../components";
 import { useGlobalContext } from "../context/GlobalProvider";
 const SplashScreen = () => {
   const [fontLoaded, setFontLoaded] = useState(false);

@@ -19,6 +19,7 @@ const SignIn = () => {
   const submit = async () => {
     if (form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill in all fields");
+      return;
     }
 
     setSubmitting(true);
@@ -39,29 +40,18 @@ const SignIn = () => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
-        <View
-          style={[
-            styles.container,
-            { minHeight: Dimensions.get("window").height - 100 },
-          ]}
-        >
-          <Image
-            source={images.logo}
-            resizeMode="contain"
-            style={styles.logo}
-          />
+        <View style={[styles.innerContainer, { minHeight: Dimensions.get("window").height - 100 }]}>
+          <Image source={images.logo} resizeMode="contain" style={styles.logo} />
 
-          <Text style={styles.title}>
-            Log in to PharwaX
-          </Text>
+          <Text style={styles.title}>Log in to PharwaX</Text>
 
           <FormField
             title="Email"
             value={form.email}
             handleChangeText={(e) => setForm({ ...form, email: e })}
-            otherStyles={styles.fieldMarginTop7}
+            otherStyles={styles.field}
             keyboardType="email-address"
           />
 
@@ -69,26 +59,19 @@ const SignIn = () => {
             title="Password"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
-            otherStyles={styles.fieldMarginTop7}
+            otherStyles={styles.field}
           />
 
           <CustomButton
             title="Sign In"
             handlePress={submit}
-            containerStyles={styles.buttonMarginTop7}
+            containerStyles={styles.button}
             isLoading={isSubmitting}
           />
 
           <View style={styles.footer}>
-            <Text style={styles.footerText}>
-              Don't have an account?
-            </Text>
-            <Link
-              href="/sign-up"
-              style={styles.footerLink}
-            >
-              Signup
-            </Link>
+            <Text style={styles.footerText}>Don't have an account?</Text>
+            <Link href="/sign-up" style={styles.footerLink}>Signup</Link>
           </View>
         </View>
       </ScrollView>
@@ -97,16 +80,15 @@ const SignIn = () => {
 };
 
 const styles = StyleSheet.create({
-  safeArea: {
-    backgroundColor: "#0384fc",
+  container: {
+    backgroundColor: "blue",
     height: "100%",
   },
-  container: {
+  innerContainer: {
     width: "100%",
     justifyContent: "center",
-    height: "100%",
     paddingHorizontal: 16,
-    marginVertical: 24,
+    marginTop: 24,
   },
   logo: {
     width: 115,
@@ -115,14 +97,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "600",
-    color: "#FFFFFF",
+    color: "#fff",
     marginTop: 40,
-    fontFamily: "psemibold",
   },
-  fieldMarginTop7: {
+  field: {
     marginTop: 28,
   },
-  buttonMarginTop7: {
+  button: {
     marginTop: 28,
   },
   footer: {
@@ -133,15 +114,13 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 18,
-    color: "#B0B0B0",
-    fontFamily: "pregular",
+    color: "#7B7B8B",
   },
   footerLink: {
     fontSize: 18,
     fontWeight: "600",
     color: "#FF6F61",
-    fontFamily: "psemibold",
   },
 });
 
-export default SignIn();
+export default SignIn;
