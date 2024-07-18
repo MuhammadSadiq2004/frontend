@@ -1,6 +1,6 @@
 import bookmark from "../assets/icons/bag.png";
 import home from "../assets/icons/home.png";
-import cart from "../assets/icons/cart.png";
+import cart from "../assets/icons/cart.jpg";
 import profile from "../assets/icons/profile.png";
 import leftArrow from "../assets/icons/left-arrow.png";
 import menu from "../assets/icons/menu.png";

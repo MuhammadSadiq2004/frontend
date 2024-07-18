@@ -8,16 +8,19 @@ import { icons } from "../../constants";
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
-    <View className="flex items-center justify-center gap-2">
+    <View style={{ alignItems: "center", justifyContent: "center", gap: 2 }}>
       <Image
         source={icon}
         resizeMode="contain"
         tintColor={color}
-        className="w-6 h-6"
+        style={{ width: 24, height: 24 }}
       />
       <Text
-        className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
-        style={{ color: color }}
+        style={{
+          fontFamily: focused ? "font-psemibold" : "font-pregular",
+          fontSize: 12,
+          color: color,
+        }}
       >
         {name}
       </Text>
@@ -26,7 +29,6 @@ const TabIcon = ({ icon, color, name, focused }) => {
 };
 
 const TabLayout = () => {
-  
   return (
     <>
       <Tabs
@@ -72,20 +74,20 @@ const TabLayout = () => {
             ),
           }}
         />
-
         <Tabs.Screen
           name="cart"
           options={{
             title: "Cart",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={icons.cart}
-                color={color}
-                name="Cart"
-                focused={focused}
-              />
-            ),
+              
+                <TabIcon
+                  icon={icons.cart}
+                  color={color}
+                  name="Cart"
+                  focused={focused}
+                />
+                         ),
           }}
         />
         <Tabs.Screen
@@ -126,5 +128,3 @@ const TabLayout = () => {
 };
 
 export default TabLayout;
-
-        

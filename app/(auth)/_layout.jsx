@@ -1,14 +1,35 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from "react";
+import { Redirect, Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import Loader from "../../components/Loader"; // Ensure the path is correct
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const AuthLayout = () => {
+  const { loading, isLogged } = useGlobalContext();
+
+  if (!loading && isLogged) return <Redirect href="/home" />;
+
   return (
-    <View>
-      <Text> AuthLayout</Text>
-    </View>
-  )
-}
+    <>
+      <Stack>
+        <Stack.Screen
+          name="sign-in"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="sign-up"
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack>
 
-export default AuthLayout
+      <Loader isLoading={loading} />
+      <StatusBar backgroundColor="#161622" style="light" />
+    </>
+  );
+};
 
-const styles = StyleSheet.create({})
+export default AuthLayout;
