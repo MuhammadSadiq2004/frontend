@@ -50,7 +50,7 @@ export default SplashScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#0384fc', // Replace with your desired color
+    backgroundColor: 'blue', // Replace with your desired color
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     fontFamily: 'mvboli', // Use the loaded font family
     textAlign: 'center',
     marginVertical: 5,
-    color: '#1b1c1b',
+    color: 'black',
   },
   inclinedText: {
     transform: [{ rotate: '-12deg' }], // Angle of inclination

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { Stack } from 'expo-router'
 import React from 'react'
-import "react-native-url-polyfill/auto";
+import 'react-native-url-polyfill/auto';
 import GlobalProvider from "../context/GlobalProvider";
 import { SplashScreen } from "expo-router";
 SplashScreen.preventAutoHideAsync();
