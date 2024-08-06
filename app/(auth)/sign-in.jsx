@@ -6,10 +6,8 @@ import axios from 'axios';
 
 import { images } from "../../constants";
 import { CustomButton, FormField } from "../../components";
-import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
-  const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     email: "",
@@ -25,11 +23,7 @@ const SignIn = () => {
     setSubmitting(true);
 
     try {
-      await axios.post('http://localhost:3000/login', form);
-      const response = await axios.get('http://localhost:3000/current-user');
-      setUser(response.data.user);
-      setIsLogged(true);
-
+      const response = await axios.post('http://192.168.100.4:3000/login', form); // Update URL for your setup
       Alert.alert("Success", "User signed in successfully");
       router.replace("/home");
     } catch (error) {

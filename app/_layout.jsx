@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { Stack } from 'expo-router'
-import React from 'react'
+import { StyleSheet, Text, View } from 'react-native';
+import { Stack } from 'expo-router';
+import React from 'react';
 import 'react-native-url-polyfill/auto';
 import GlobalProvider from "../context/GlobalProvider";
 import { SplashScreen } from "expo-router";
+
 SplashScreen.preventAutoHideAsync();
+
 const RootLayout = () => {
   return (
     <GlobalProvider>
@@ -15,18 +17,16 @@ const RootLayout = () => {
         <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
       </Stack>
     </GlobalProvider>
-
-  )
+  );
 }
 
-export default RootLayout
+export default RootLayout;
 
 const styles = StyleSheet.create({
-  container:{
-    display:'flex',
-    flex:1,
-    alignItems:'center',
-    justifyContent:'center',
-
+  container: {
+    display: 'flex',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   }
-})
+});
