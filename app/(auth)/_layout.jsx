@@ -1,7 +1,7 @@
-import React from "react";
 import { Redirect, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import Loader from "../../components/Loader"; // Ensure the path is correct
+
+import  {Loader}  from "../../components";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const AuthLayout = () => {
