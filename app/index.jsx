@@ -3,8 +3,8 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useRouter } from 'expo-router'; // Ensure this is correctly imported
 import * as Font from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
-import  {Loader}  from "../components";
-import { useGlobalContext } from "../context/GlobalProvider";
+import { Loader } from "../components";
+
 const SplashScreen = () => {
   const [fontLoaded, setFontLoaded] = useState(false);
   const router = useRouter();
@@ -21,7 +21,7 @@ const SplashScreen = () => {
 
     const timer = setTimeout(() => {
       router.replace('/sign-in'); // Use the router to navigate
-    }, 10000); // Display splash screen for 3 seconds
+    }, 10000); // Display splash screen for 10 seconds
 
     return () => clearTimeout(timer); // Clear the timer on component unmount
   }, [router]);
@@ -29,13 +29,9 @@ const SplashScreen = () => {
   if (!fontLoaded) {
     return null; // Render a loading indicator or fallback
   }
-  const { loading, isLogged } = useGlobalContext();
-
-  if (!loading && isLogged) return <Redirect href="/sign-in" />;
 
   return (
     <SafeAreaView style={styles.container}>
-       <Loader isLoading={loading} />
       <View style={styles.textContainer}>
         <Text style={[styles.text, styles.inclinedText]}>Cure At</Text>
         <Text style={[styles.text, styles.inclinedText]}>Your</Text>

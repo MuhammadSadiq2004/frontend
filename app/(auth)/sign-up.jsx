@@ -10,13 +10,13 @@ import { CustomButton, FormField } from "../../components";
 const SignUp = () => {
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
   });
 
   const submit = async () => {
-    if (form.username === "" || form.email === "" || form.password === "") {
+    if (form.name === "" || form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill in all fields");
       return;
     }
@@ -24,7 +24,15 @@ const SignUp = () => {
     setSubmitting(true);
 
     try {
-      const response = await axios.post('http://192.168.100.4:3000/signup', form); // Update URL for your setup
+      const response = await axios.post(
+        'http://192.168.100.4:3000/signup',
+        form,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
       Alert.alert("Success", "User signed up successfully");
       router.replace("/home");
     } catch (error) {
@@ -54,9 +62,9 @@ const SignUp = () => {
           </Text>
 
           <FormField
-            title="Username"
-            value={form.username}
-            handleChangeText={(e) => setForm({ ...form, username: e })}
+            title="Name"
+            value={form.name}
+            handleChangeText={(e) => setForm({ ...form, name: e })}
             otherStyles="mt-10"
           />
 
@@ -73,6 +81,7 @@ const SignUp = () => {
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
+            secureTextEntry
           />
 
           <CustomButton

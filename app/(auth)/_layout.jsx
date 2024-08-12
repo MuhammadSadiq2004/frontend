@@ -1,7 +1,7 @@
 import { Redirect, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
-import { Loader } from "../../components";
+import  {Loader} from "../../components";
 
 const AuthLayout = () => {
   const loading = false; // Replace with actual loading state if needed
