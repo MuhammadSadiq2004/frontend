@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import { images } from "../../constants";
 import { CustomButton, FormField } from "../../components";
+import { UserContext } from "../../context/Usercontext";
 
 const SignUp = () => {
   const [isSubmitting, setSubmitting] = useState(false);
@@ -14,6 +15,7 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+  const { setUserData } = useContext(UserContext);
 
   const submit = async () => {
     if (form.name === "" || form.email === "" || form.password === "") {
@@ -24,17 +26,14 @@ const SignUp = () => {
     setSubmitting(true);
 
     try {
-      const response = await axios.post(
-        'http://192.168.100.4:3000/signup',
-        form,
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          }
+      const response = await axios.post('http://192.168.100.4:3000/api/users/signup', form, {
+        headers: {
+          'Content-Type': 'application/json'
         }
-      );
+      });
       Alert.alert("Success", "User signed up successfully");
-      router.replace("/home");
+      setUserData({ email: form.email, password: form.password });
+      router.replace("/otp");
     } catch (error) {
       Alert.alert("Error", error.response?.data?.message || error.message);
     } finally {
