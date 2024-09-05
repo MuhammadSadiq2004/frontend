@@ -1,9 +1,10 @@
-import React, { useRef, useState, useContext, useEffect } from 'react';
-import { View, TextInput, StyleSheet, ScrollView, Alert, Text } from 'react-native';
+import React, { useRef, useState, useContext } from 'react';
+import { View, TextInput, StyleSheet, ScrollView, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
 import { CustomButton } from "../../components";
 import { UserContext } from "../../context/Usercontext";
+import Timer from '../../components/Timer'; // Adjust the import path as needed
 import { router } from 'expo-router';
 
 const OTPInputScreen = () => {
@@ -15,20 +16,6 @@ const OTPInputScreen = () => {
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const inputs = useRef([]);
 
-  useEffect(() => {
-    let interval;
-
-    if (timer > 0) {
-      interval = setInterval(() => {
-        setTimer(prevTimer => prevTimer - 1);
-      }, 1000);
-    } else if (timer === 0) {
-      setButtonDisabled(false);
-    }
-
-    return () => clearInterval(interval);
-  }, [timer]);
-
   const handleInputChange = (value, index) => {
     const newOtp = [...otp];
     newOtp[index] = value;
@@ -37,6 +24,11 @@ const OTPInputScreen = () => {
     if (value && index < 5) {
       inputs.current[index + 1].focus();
     }
+  };
+
+  const clearInputs = () => {
+    setOtp(['', '', '', '', '', '']);
+    inputs.current[0].focus(); // Optionally focus the first input
   };
 
   const handleOtpSend = async () => {
@@ -53,6 +45,7 @@ const OTPInputScreen = () => {
       });
 
       Alert.alert("Success", "OTP sent successfully");
+      clearInputs(); // Clear input fields after sending OTP
     } catch (error) {
       Alert.alert("Error", error.response?.data?.message || error.message);
     } finally {
@@ -84,12 +77,6 @@ const OTPInputScreen = () => {
     } finally {
       setSubmitting(false);
     }
-  };
-
-  const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
   return (
@@ -126,11 +113,7 @@ const OTPInputScreen = () => {
         />
       </ScrollView>
 
-      <View style={styles.timerContainer}>
-        <Text style={styles.timerText}>
-          {isButtonDisabled ? `Please wait ${formatTime(timer)} before resending` : ''}
-        </Text>
-      </View>
+      <Timer initialTime={120} isActive={isButtonDisabled} />
     </SafeAreaView>
   );
 };
@@ -160,14 +143,6 @@ const styles = StyleSheet.create({
   buttonDisabled: {
     backgroundColor: '#d3d3d3', // Dimmed color for disabled button
     opacity: 0.6,
-  },
-  timerContainer: {
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  timerText: {
-    fontSize: 16,
-    color: '#fff',
   },
 });
 
